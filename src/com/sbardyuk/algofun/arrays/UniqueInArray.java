@@ -1,4 +1,4 @@
-package com.sbardyuk.algofun;
+package com.sbardyuk.algofun.arrays;
 
 import java.util.HashMap;
 import java.util.Map;
