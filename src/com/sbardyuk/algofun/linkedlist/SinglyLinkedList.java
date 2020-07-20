@@ -92,4 +92,36 @@ public class SinglyLinkedList<T> {
 
         return false;
     }
+
+    public void deleteAtHead() {
+        if (isEmpty()) {
+            return;
+        }
+
+        //make the nextNode of the headNode equal to new headNode
+        headNode = headNode.nextNode;
+        size--;
+    }
+
+    public void deleteByValue(T data) {
+
+        if (isEmpty()) {
+            return;
+        }
+
+        if (headNode.data.equals(data)) {
+            deleteAtHead();
+        }
+
+        Node curr = headNode;
+        Node prev = null;
+        while(curr != null) {
+            if (curr.data != null && curr.data.equals(data) && prev != null) {
+                prev.nextNode = curr.nextNode;
+                return;
+            }
+            prev = curr;
+            curr = curr.nextNode;
+        }
+    }
 }
