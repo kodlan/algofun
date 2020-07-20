@@ -124,4 +124,33 @@ public class SinglyLinkedList<T> {
             curr = curr.nextNode;
         }
     }
+
+    public static <T> void reverse( SinglyLinkedList<T> list) {
+        SinglyLinkedList.Node prev = null;
+        SinglyLinkedList.Node curr = list.headNode;
+        SinglyLinkedList.Node next = null;
+
+        while (curr != null) {
+            next = curr.nextNode;
+            curr.nextNode = prev;
+            prev = curr;
+            curr = next;
+        }
+        list.headNode = prev;
+    }
+
+    public static void main(String[] args) {
+        SinglyLinkedList<Integer> list = new SinglyLinkedList<Integer>();
+        for(int i = 0; i < 15; i += 1) {
+            list.insertAtEnd(i);
+        }
+
+        System.out.print("Before ");
+        list.printList();
+
+        reverse(list);
+
+        System.out.print("After ");
+        list.printList();
+    }
 }
