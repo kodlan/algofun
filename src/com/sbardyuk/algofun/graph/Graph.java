@@ -95,6 +95,36 @@ public class Graph {
         return res.toString();
     }
 
+    private static boolean hasCycleRecursive(Graph g, int currentNode, boolean[] visited, int parent) {
+        visited[currentNode] = true;
+
+        for (Integer v : g.adjacencyArray[currentNode]) {
+            if (! visited[v]) {
+                if (hasCycleRecursive(g, v, visited, currentNode)) {
+                    return true;
+                }
+            } else if (parent != v) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean hasCycle(Graph g) {
+        boolean[] visited = new boolean[g.verticesNum];
+
+        for (int i = 0; i < g.verticesNum; i++) {
+            if (! visited[i]) {
+                if (hasCycleRecursive(g, i, visited, -1)) {
+                    return true;
+                }
+
+            }
+        }
+        return  false;
+
+    }
+
     public static void main(String[] args) {
         Graph g = new Graph(5, false);
         g.addEdge(0,1);
@@ -106,6 +136,7 @@ public class Graph {
 
         System.out.println(bfsTraversal(g, 0));
         System.out.println(dfsTraversal(g, 0));
+        System.out.println(hasCycle(g));
 
 
         g = new Graph(5, false);
@@ -122,6 +153,7 @@ public class Graph {
 
         System.out.println(bfsTraversal(g, 0));
         System.out.println(dfsTraversal(g, 0));
+        System.out.println(hasCycle(g));
     }
 }
 
