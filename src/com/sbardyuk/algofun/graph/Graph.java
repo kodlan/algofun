@@ -1,8 +1,8 @@
 package com.sbardyuk.algofun.graph;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 public class Graph {
     private boolean isUndirected = false;
@@ -47,26 +47,46 @@ public class Graph {
 
     public static String bfsTraversal(Graph g, int source) {
         StringBuilder res = new StringBuilder();
-        if (g.verticesNum < 1) {
-            throw new IllegalArgumentException();
-        }
 
         boolean[] visited = new boolean[g.verticesNum];
 
         Queue<Integer> queue = new LinkedList<>();
         queue.add(source);
+        visited[source] = true;
 
         while (!queue.isEmpty()) {
             int currentNode = queue.poll();
-            visited[currentNode] = true;
 
             res.append(" -> ").append(currentNode);
 
-            LinkedList<Integer> nodes = g.adjacencyArray[currentNode];
-
-            for (Integer node : nodes) {
+            for (Integer node : g.adjacencyArray[currentNode]) {
                 if (! visited[node]) {
                     queue.add(node);
+                    visited[node] = true;
+                }
+            }
+        }
+
+        return res.toString();
+    }
+
+    public static String dfsTraversal(Graph g, int source) {
+        StringBuilder res = new StringBuilder();
+
+        boolean[] visited = new boolean[g.verticesNum];
+
+        Stack<Integer> stack = new Stack<>();
+        stack.push(source);
+        visited[source] = true;
+
+        while (!stack.isEmpty()) {
+            int currentNode = stack.pop();
+
+            res.append(" -> ").append(currentNode);
+
+            for (Integer node : g.adjacencyArray[currentNode]) {
+                if (! visited[node]) {
+                    stack.push(node);
                     visited[node] = true;
                 }
             }
@@ -85,6 +105,7 @@ public class Graph {
         g.print();
 
         System.out.println(bfsTraversal(g, 0));
+        System.out.println(dfsTraversal(g, 0));
 
 
         g = new Graph(5, false);
@@ -100,6 +121,7 @@ public class Graph {
         g.print();
 
         System.out.println(bfsTraversal(g, 0));
+        System.out.println(dfsTraversal(g, 0));
     }
 }
 
