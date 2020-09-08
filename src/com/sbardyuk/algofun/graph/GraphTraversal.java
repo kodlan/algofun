@@ -1,8 +1,6 @@
 package com.sbardyuk.algofun.graph;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class GraphTraversal {
 
@@ -38,23 +36,44 @@ public class GraphTraversal {
 
         Stack<Integer> stack = new Stack<>();
         stack.push(source);
-        visited[source] = true;
 
         while (!stack.isEmpty()) {
             int currentNode = stack.pop();
+            visited[currentNode] = true;
 
             res.append(" -> ").append(currentNode);
 
-            for (Integer node : g.adjacencyArray[currentNode]) {
+            for (Integer node : g.adjacencyArray[currentNode]) { // if we want this dfs to march dfs with recursion this should iterate in reverse order!!!
                 if (! visited[node]) {
                     stack.push(node);
-                    visited[node] = true;
                 }
             }
         }
 
         return res.toString();
     }
+
+    /****** DFS Recursive implementation!!! ***/
+    public static String dfsTraversalRecursive(Graph g, int source) {
+        StringBuilder sb = new StringBuilder();
+
+        boolean[] visited = new boolean[g.verticesNum];
+        dfsRecursive(g, source, visited, sb);
+
+        return sb.toString();
+    }
+
+    private static void dfsRecursive(Graph g, int current, boolean[] visited, StringBuilder sb) {
+        visited[current] = true;
+
+        sb.append(" -> ").append(current);
+
+        for (int dest : g.adjacencyArray[current]) {
+            if (!visited[dest])
+                dfsRecursive(g, dest, visited, sb);
+        }
+    }
+    /*********/
 
     private static boolean hasCycleRecursive(Graph g, int currentNode, boolean[] visited, int parent) {
         visited[currentNode] = true;
@@ -97,6 +116,7 @@ public class GraphTraversal {
 
         System.out.println(bfsTraversal(g, 0));
         System.out.println(dfsTraversal(g, 0));
+        System.out.println(dfsTraversalRecursive(g, 0));
         System.out.println(hasCycle(g));
 
 
@@ -114,6 +134,7 @@ public class GraphTraversal {
 
         System.out.println(bfsTraversal(g, 0));
         System.out.println(dfsTraversal(g, 0));
+        System.out.println(dfsTraversalRecursive(g, 0));
         System.out.println(hasCycle(g));
     }
 }
