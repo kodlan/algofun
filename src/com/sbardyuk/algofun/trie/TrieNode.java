@@ -36,4 +36,12 @@ public class TrieNode {
     public boolean isWordEnd() {
         return isWordEnd;
     }
+
+    public boolean hasNoChildren() {
+        return children.keySet().isEmpty();
+    }
+
+    public void clearChildren(char ch) {
+        children.remove(ch);
+    }
 }
