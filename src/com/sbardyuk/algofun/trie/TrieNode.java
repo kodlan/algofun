@@ -44,4 +44,8 @@ public class TrieNode {
     public void clearChildren(char ch) {
         children.remove(ch);
     }
+
+    public HashMap<Character, TrieNode> getChildren() {
+        return children;
+    }
 }
