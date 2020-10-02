@@ -1,6 +1,5 @@
 package com.sbardyuk.algofun.heap;
 
-import java.sql.SQLOutput;
 import java.util.Arrays;
 
 public class Heap {
@@ -64,6 +63,30 @@ public class Heap {
         }
     }
 
+    private void minHeapifyRecursive(int [] heapArray, int index, int heapSize) {
+        int leftIndex = index * 2 + 1;
+        int rightIndex = index * 2 + 2;
+
+        int smallestChildIndex = index;
+        if (rightIndex < heapSize && heapArray[index] > heapArray[rightIndex]) {
+            smallestChildIndex = rightIndex;
+        }
+        if (leftIndex < heapSize &&  heapArray[smallestChildIndex] > heapArray[leftIndex]) {
+            smallestChildIndex = leftIndex;
+        }
+
+        if (index != smallestChildIndex) {
+            swap(heapArray, smallestChildIndex, index);
+            minHeapifyRecursive(heapArray, smallestChildIndex, heapSize);
+        }
+    }
+
+    public void minHeapifyArrayRecursive(int [] heapArray) {
+        for (int i = (heapArray.length - 1) / 2; i >= 0; i --) {
+            minHeapifyRecursive(heapArray, i, heapArray.length);
+        }
+    }
+
     public static void main(String[] args) {
         Heap heap = new Heap();
 
@@ -76,5 +99,11 @@ public class Heap {
         System.out.println(Arrays.toString(heapArrayRec));
         heap.maxHeapifyArrayRecursive(heapArrayRec);
         System.out.println(Arrays.toString(heapArrayRec));
+
+        System.out.println("Min heap:");
+        int [] heapArrayRecMin = { 1, 4, 7, 12, 15, 14, 9, 2, 3, 16};
+        System.out.println(Arrays.toString(heapArrayRecMin));
+        heap.minHeapifyArrayRecursive(heapArrayRecMin);
+        System.out.println(Arrays.toString(heapArrayRecMin));
     }
 }
