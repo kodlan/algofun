@@ -1,5 +1,6 @@
 package com.sbardyuk.algofun.patterns.slidingwindow;
 
+// not finished !!
 public class LongestSubstringAfterReplacement {
 
     public static int findLength(String str, int k) {
