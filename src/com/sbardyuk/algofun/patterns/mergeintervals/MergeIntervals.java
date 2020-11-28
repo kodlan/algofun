@@ -68,9 +68,9 @@ public class MergeIntervals {
 
         List<Interval> intervalList2 = new ArrayList<> (Arrays.asList(new Interval(1, 4), new Interval(2, 6), new Interval(3, 5)));
 
-        printIntervals(intervalList);
+        printIntervals(intervalList2);
         System.out.print(" -> ");
-        printIntervals(mergeIntervals(intervalList));
+        printIntervals(mergeIntervals(intervalList2));
         System.out.println();
 
     }
