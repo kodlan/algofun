@@ -13,11 +13,16 @@ public class MissingNumbers {
     public static List<Integer> findMissingNumber(int [] arr) {
         List<Integer> res = new ArrayList<>();
 
-        for (int i = 0; i < arr.length; i ++) {
-            swap(arr, i, arr[i] - 1);
+        int i = 0;
+        while (i < arr.length) {
+            if (arr[i] != arr[arr[i] - 1]) {
+                swap(arr, i, arr[i] - 1);
+            } else {
+                i ++;
+            }
         }
 
-        for (int i = 0; i < arr.length; i ++) {
+        for (i = 0; i < arr.length; i ++) {
             if (arr[i] != i + 1) {
                 res.add(i + 1);
             }
@@ -33,9 +38,14 @@ public class MissingNumbers {
     }
 
     public static void main(String[] args) {
-        int [] a = new int [] { 5, 5, 1, 2, 2, 6};
-
-        List<Integer> res = findMissingNumber(a);
+        List<Integer> res = findMissingNumber(new int [] { 5, 5, 1, 2, 2, 6});
         System.out.println(Arrays.toString(res.toArray()));
+
+        res = findMissingNumber(new int [] { 2, 4, 1, 2 });
+        System.out.println(Arrays.toString(res.toArray()));
+
+        res = findMissingNumber(new int [] { 2, 3, 2, 1 });
+        System.out.println(Arrays.toString(res.toArray()));
+
     }
 }
