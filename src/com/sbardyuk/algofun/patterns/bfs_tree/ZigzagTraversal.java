@@ -1,4 +1,4 @@
-package com.sbardyuk.algofun.patterns.bfs;
+package com.sbardyuk.algofun.patterns.bfs_tree;
 
 import java.util.*;
 
