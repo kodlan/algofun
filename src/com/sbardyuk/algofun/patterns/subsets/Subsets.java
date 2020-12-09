@@ -31,12 +31,37 @@ public class Subsets {
         }
     }
 
+    static List<List<Integer>> subsetsNotRecursive(int [] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+
+        res.add(new ArrayList<>());
+
+        for (int i : nums) {
+            List<List<Integer>> toAdd = new ArrayList<>();
+
+            for (List<Integer> list : res) {
+                List<Integer> newList = new ArrayList<>(list);
+                newList.add(i);
+                toAdd.add(newList);
+            }
+
+            res.addAll(toAdd);
+        }
+
+        return res;
+    }
 
     public static void main(String[] args) {
         List<List<Integer>> result = findSubsets(new int[] { 1, 3 });
         System.out.println(result);
 
+        result = subsetsNotRecursive(new int[] { 1, 3 });
+        System.out.println(result);
+
         result = findSubsets(new int[] { 1, 5, 3 });
+        System.out.println(result);
+
+        result = subsetsNotRecursive(new int[] { 1, 5, 3 });
         System.out.println(result);
     }
 }
