@@ -83,6 +83,35 @@ public class EqualSubsetsFromArray {
         return sum;
     }
 
+    private static boolean caPartTab(int [] arr) {
+        int sum = sum(arr);
+        int n = arr.length;
+
+        if (sum % 2 != 0) {
+            return false;
+        }
+
+        int halfSum = n / 2;
+
+        boolean [][] t = new boolean[n][halfSum + 1];
+
+        for (int i = 0; i < n; i++) t[i][0] = true; // for sum == 0 we can always take empty set
+
+        for (int s = 1; s <= halfSum; s++) t[0][s] = s == arr[0]; // with only first element
+
+        for (int i = 1; i < n; i++) {
+            for (int s = 1; s <= halfSum; s++) {
+                if (s < arr[i]) {
+                    t[i][s] = t[i - 1][s];
+                } else {
+                    t[i][s] = t[i - 1][s] | t[i - 1][halfSum - arr[i]];
+                }
+            }
+        }
+
+        return t[n - 1][halfSum];
+    }
+
     public static void main(String[] args) {
 
         System.out.println(canPart(new int [] {1, 2, 3, 4}));
@@ -93,6 +122,9 @@ public class EqualSubsetsFromArray {
         System.out.println(canPartMemo(new int [] {1, 1, 3, 4, 7}));
         System.out.println(canPartMemo(new int [] {2, 3, 4, 6}));
 
+        System.out.println(caPartTab(new int [] {1, 2, 3, 4}));
+        System.out.println(caPartTab(new int [] {1, 1, 3, 4, 7}));
+        System.out.println(caPartTab(new int [] {2, 3, 4, 6}));
     }
 
 }
