@@ -12,8 +12,8 @@ public class Knapsack {
         }
 
         int profit1 = 0;
-
         if (weights[index] <= weightLeft) {
+            // if multiple same item are allowed index should not be incremented, then we will take the same once again
             profit1 = profits[index] + knapRec(profits, weights, weightLeft - weights[index], index + 1);
         }
 
