@@ -41,27 +41,26 @@ public class StringContainsAnyPermut {
 
     public static boolean findPermutation(String str, String pattern) {
         Map<Character, Integer> freq = freq(pattern);
-        Map<Character, Integer> workfreq = new HashMap<>(freq);
 
         int windowStart = 0;
         int windowEnd = 0;
 
         for (; windowEnd < pattern.length(); windowEnd ++) {
-            decrementAndRemove(workfreq, str.charAt(windowEnd));
+            decrementAndRemove(freq, str.charAt(windowEnd));
         }
 
-        if (workfreq.isEmpty()) {
+        if (freq.isEmpty()) {
             return true;
         }
 
         while (windowEnd < str.length()) {
-            decrementAndRemove(workfreq, str.charAt(windowEnd));
+            decrementAndRemove(freq, str.charAt(windowEnd));
             windowEnd++;
 
-            incrementAndRemove(workfreq, str.charAt(windowStart));
+            incrementAndRemove(freq, str.charAt(windowStart));
             windowStart++;
 
-            if (workfreq.isEmpty()) {
+            if (freq.isEmpty()) {
                 return true;
             }
         }
