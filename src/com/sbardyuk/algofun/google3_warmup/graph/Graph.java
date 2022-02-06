@@ -7,12 +7,10 @@ import java.util.Map;
 
 public class Graph {
     private int verticies = 0;
-    Map<Integer, List<Integer>> adjMap = new HashMap<>();
     private boolean isUnidirected = false;
 
-    public Graph(boolean isUnidirected) {
-        this.isUnidirected = isUnidirected;
-    }
+    Map<Integer, List<Integer>> adjMap = new HashMap<>();
+    Map<Integer, Integer> inDegree = new HashMap<>();
 
     public Graph(int [][] graph, boolean isUnidirected) {
         this.isUnidirected = isUnidirected;
@@ -38,6 +36,15 @@ public class Graph {
         if (!list.contains(to)) {
             list.add(to);
             adjMap.put(from, list);
+
+            inDegree.put(from, inDegree.getOrDefault(from, 0) + 1);
+            if (!inDegree.containsKey(to)) {
+                inDegree.put(to, 0);
+            }
+        }
+
+        if (!adjMap.containsKey(to)) {
+            adjMap.put(to, new ArrayList<>());
         }
 
         verticies = adjMap.size();
