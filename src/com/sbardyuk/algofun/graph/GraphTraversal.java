@@ -2,6 +2,7 @@ package com.sbardyuk.algofun.graph;
 
 import java.util.*;
 
+// this has some issues
 public class GraphTraversal {
 
     public static String bfsTraversal(Graph g, int source) {
