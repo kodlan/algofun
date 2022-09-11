@@ -16,24 +16,22 @@ public class ReverseLinkedList {
 
     public static ListNode reverse(ListNode head) {
 
-        ListNode newPrev = null;
+        ListNode prev = null;
+        ListNode current = head;
+        ListNode tmpnext;
 
-        ListNode currentNode = head;
-        ListNode nextNode = head.next;
+        while (current.next != null) {
+            tmpnext = current.next;
 
-        while (nextNode != null) {
+            current.next = prev;
 
-            currentNode.next = newPrev;
-
-            ListNode tmp2 = nextNode.next;
-            nextNode.next = currentNode;
-
-            newPrev = currentNode;
-            currentNode = nextNode;
-            nextNode = tmp2;
+            prev = current;
+            current = tmpnext;
         }
 
-        return currentNode;
+        current.next = prev;
+
+        return current;
     }
 
     public static void main(String[] args) {
