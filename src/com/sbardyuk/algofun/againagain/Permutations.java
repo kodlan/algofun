@@ -37,7 +37,7 @@ public class Permutations {
 
                 for (int i = 0; i < list.size() + 1; i ++) {
                     List<Integer> copy = new ArrayList<>(list);
-                    copy.add(num);
+                    copy.add(i, num);
                     newRes.add(copy);
                 }
 
