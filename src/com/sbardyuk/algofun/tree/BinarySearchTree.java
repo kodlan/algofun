@@ -1,5 +1,7 @@
 package com.sbardyuk.algofun.tree;
 
+/** Some old test implementation */
+@Deprecated
 public class BinarySearchTree {
 
     private Node root;
