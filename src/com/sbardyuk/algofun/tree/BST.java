@@ -46,6 +46,55 @@ public class BST {
 
   }
 
+  public void delete(int value) {
+    delete(root, value);
+  }
+
+  private BinaryNode delete(BinaryNode root, int value) {
+
+    if (root == null) {
+      return null;
+    }
+
+    // continue searching for the node
+    if (value > root.value) {
+      root.right = delete(root.right, value);
+    } else if (value < root.value) {
+      root.right = delete(root.left, value);
+    } else {
+
+      if (root.left == null && root.right == null) {
+        // leaf node - just delete from the parent
+        return null;
+      } else if (root.left != null && root.right == null) {
+        // only left node exists - return it instead of root
+        return root.left;
+      } else if (root.left == null && root.right != null) {
+        // only right node exists - return it instead of root
+        return root.right;
+      } else {
+        // two children exist - find minimum from the right subtree, replace it with root, and delete root
+        BinaryNode minNode = minNode(root.right);
+
+        root.value = minNode.value;
+        root.right = delete(root.right, minNode.value);
+      }
+    }
+
+    return root;
+  }
+
+  private BinaryNode minNode(BinaryNode root) {
+    if (root == null) {
+      return null;
+    }
+    if (root.left == null) {
+      return root;
+    } else {
+      return minNode(root.left);
+    }
+  }
+
   public BinaryNode search(int value) {
     if (root == null) return null;
     return searchInternal(root, value);
@@ -108,5 +157,11 @@ public class BST {
     System.out.println("search res = " + bst.search(10).value);
     System.out.println("search res = " + bst.search(11));
     System.out.println("search res = " + bst.search(4).value);
+
+    System.out.println();
+    System.out.println();
+
+    bst.delete(9);
+    bst.print();
   }
 }
